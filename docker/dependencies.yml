@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    ports:
+      - 5001:5432
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=deck-game
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
