@@ -28,7 +28,7 @@ export class GameController {
   @Post()
   async create(@Body() createGameDTO: CreateGameDTO) {
     return this.gameService.create(
-      createGameDTO.playersName,
+      createGameDTO.playerName,
       createGameDTO.name,
     );
   }

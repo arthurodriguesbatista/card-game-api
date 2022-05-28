@@ -27,16 +27,14 @@ export class GameService {
     });
   }
 
-  async create(playersName: string[], name: string) {
+  async create(playerName: string, name: string) {
     const deck = await this.prisma.card.findMany();
     return this.prisma.game.create({
       data: {
         name,
         players: {
-          createMany: {
-            data: playersName.map((playerName) => ({
-              name: playerName,
-            })),
+          create: {
+            name: playerName,
           },
         },
         shoe: {

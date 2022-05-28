@@ -1,14 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ArrayNotEmpty, IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateGameDTO {
-  @ApiProperty({ example: ['Arthur', 'Brian'] })
-  @IsString({ each: true })
-  @ArrayNotEmpty()
+  @ApiProperty({ example: 'Arthur' })
+  @IsString()
   @IsNotEmpty()
-  playersName: string[];
+  playerName: string;
 
   @ApiProperty({ example: 'Just for fun' })
+  @IsNotEmpty()
   @IsString()
   name: string;
 }
