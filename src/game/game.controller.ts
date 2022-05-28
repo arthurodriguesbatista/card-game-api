@@ -40,6 +40,7 @@ export class GameController {
       skip,
       take,
       orderBy,
+      include,
       where = {},
     }: PaginationDto<
       Prisma.GameWhereInput,
@@ -50,6 +51,7 @@ export class GameController {
     return this.gameService.findMany({
       skip,
       take,
+      include,
       where: {
         ...where,
         deletedAt: null,
