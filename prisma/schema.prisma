@@ -42,5 +42,6 @@ model Card {
   suit      String
   face      String
   value     Int
+  imageUrl  String
   deckCards DeckCard[]
 }
