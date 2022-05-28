@@ -29,5 +29,6 @@ export class PaginationDto<WHERE, ORDERBY, INCLUDE> {
 
   @ApiPropertyOptional({ example: '{"relation": true}', type: 'string' })
   @IsOptional()
+  @Transform(({ value }) => JSON.parse(value))
   include?: INCLUDE;
 }
