@@ -25,9 +25,6 @@ async function createCards() {
     faceValues.map((faceValue) => ({
       face: faceValue.face,
       value: faceValue.value,
-      imageUrl: `${process.env.BASE_URL}/public/${
-        faceValue.face + '_' + suit
-      }.png`,
       suit,
     })),
   );

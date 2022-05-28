@@ -33,7 +33,6 @@ CREATE TABLE "Card" (
     "suit" TEXT NOT NULL,
     "face" TEXT NOT NULL,
     "value" INTEGER NOT NULL,
-    "imageUrl" TEXT NOT NULL,
 
     CONSTRAINT "Card_pkey" PRIMARY KEY ("id")
 );
