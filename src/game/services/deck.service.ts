@@ -6,16 +6,14 @@ export class DeckService {
   constructor(private readonly prisma: PrismaService) {}
 
   async returnPlayerCardsToShoe(playerId: number) {
-    await this.prisma.deckCard.updateMany({
+    await this.prisma.playerCard.deleteMany({
       where: { playerId },
-      data: { playerId: null },
     });
   }
 
   async addCardToPlayerHand(playerId: number, cardId: number) {
-    return this.prisma.deckCard.update({
-      where: { id: cardId },
-      data: { playerId },
+    return this.prisma.playerCard.create({
+      data: { playerId, deckCardId: cardId },
     });
   }
 }

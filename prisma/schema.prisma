@@ -20,25 +20,37 @@ model Game {
 }
 
 model DeckCard {
-  id       Int     @id @default(autoincrement())
-  cardId   Int
-  card     Card    @relation(fields: [cardId], references: [id])
-  gameId   Int
-  game     Game    @relation(fields: [gameId], references: [id])
-  playerId Int?
-  player   Player? @relation(fields: [playerId], references: [id])
+  id         Int         @id @default(autoincrement())
+  createdAt  DateTime    @default(now())
+  order      Int         @default(autoincrement())
+  cardId     Int
+  card       Card        @relation(fields: [cardId], references: [id])
+  gameId     Int
+  game       Game        @relation(fields: [gameId], references: [id])
+  playerCard PlayerCard?
 }
 
 model Player {
-  id        Int        @id @default(autoincrement())
-  name      String
-  gameId    Int
-  game      Game       @relation(fields: [gameId], references: [id])
-  deckCards DeckCard[]
+  id          Int          @id @default(autoincrement())
+  createdAt   DateTime     @default(now())
+  name        String
+  gameId      Int
+  game        Game         @relation(fields: [gameId], references: [id])
+  playerCards PlayerCard[]
+}
+
+model PlayerCard {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  playerId   Int
+  player     Player   @relation(fields: [playerId], references: [id])
+  deckCardId Int      @unique
+  deckCard   DeckCard @relation(fields: [deckCardId], references: [id])
 }
 
 model Card {
   id        Int        @id @default(autoincrement())
+  createdAt DateTime   @default(now())
   suit      String
   face      String
   value     Int

@@ -63,8 +63,17 @@ export class GameController {
   @Get(':id')
   async findOne(@Param('id') gameId: number) {
     return this.gameService.findOne(gameId, {
-      players: { include: { deckCards: { include: { card: true } } } },
-      shoe: { where: { playerId: null }, include: { card: true } },
+      players: {
+        orderBy: { createdAt: 'asc' },
+        include: {
+          playerCards: { include: { deckCard: { include: { card: true } } } },
+        },
+      },
+      shoe: {
+        orderBy: { order: 'asc' },
+        where: { playerCard: null },
+        include: { card: true },
+      },
     });
   }
   @Delete(':id')
@@ -81,6 +90,16 @@ export class GameController {
       gameId,
       createPlayerDTO.playerName,
     );
+  }
+
+  @Post(':id/deck')
+  async addDeckToGame(@Param('id') gameId: number) {
+    return this.gameService.addDeck(gameId);
+  }
+
+  @Post(':id/suffle')
+  async shuffle(@Param('id') gameId: number) {
+    return this.gameService.shuffle(gameId);
   }
 
   @Delete(':id/player/:playerId')
